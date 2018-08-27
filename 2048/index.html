@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./css/t2048.css">
+	<script type="text/javascript" src = './js/jquery.js'></script>
+</head>
+<body>
+	<div class="box">
+		<div class="hhead">
+			<div class="score">0</div>
+			<div class="best">0</div>
+		</div>
+		<div class="hbody">
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	<button>again</button>
+</body>
+</html>
+<script>
+var life = 1;
+//随机生成数字函数兼判断空位
+function ran (){
+	count = 0
+	$('li').each(function(){
+		if($(this).html() == '') count++
+	})
+	//没有空位判定
+	if(count == 0){
+		life = 0;
+		return ;
+	}
+	var rand = parseInt(Math.random()*16);
+	if($('li').eq(rand).html() == ''){
+		var arr = [2,4];
+		var num = arr[Math.floor(Math.random()*2)]
+		$('li').eq(rand).html(num);
+		$('li').eq(rand).addClass('num'+num);
+		life = 1;
+	}else{
+		return ran();
+	}
+}
+//生成两个随机数字
+ran();
+ran();
+// 移动函数 
+function move (index,step){
+	if($('li').eq(index).html() == '' && $('li').eq(index+step).html() != ''){
+		var pre = $('li').eq(index);
+		var nex = $('li').eq(index + step);
+		pre.html(nex.html());
+		nex.html('');
+		pre.removeClass().addClass(nex.attr('class'));
+		nex.removeClass();
+	}
+}
+
+//左运动函数
+function leftM(){
+	for(var i = 0 ; i < 13 ; i +=4){
+		for(var t = 0;t < 3;t++){
+			for(var j = 0;j < 3 ; j++){
+				move(i+j,1)
+			}
+		}
+	}
+}
+function rightM(){
+	for(var i = 0 ; i < 13 ; i += 4){
+		for(var t = 0 ; t < 3 ; t++){
+			for(var j = 1; j < 4 ; j++){
+				move(i+j,-1)
+			}
+		}
+	}
+}
+function downM(){
+	for(var i = 0; i<=3;i++){
+		for(var t = 0 ; t < 3;t++){
+			for(var j = 4 ; j < 13 ; j+=4){
+				move(i+j,-4)
+			}
+		}
+	}
+}
+function upM(){
+	for(var i = 0; i<= 3;i++){
+		for(var t = 0 ; t < 3 ;t++){
+			for(var j = 0 ; j < 9 ; j+=4){
+				move(i+j,4)
+			}
+		}
+	}
+}
+//键盘控制
+$(window).keydown(function(event){
+	switch(event.keyCode){
+		case 37 : leftend() ;
+		break;
+		case 38 : upend();
+		break;
+		case 39 : rightend();
+		break;
+		case 40 : downend();
+		break;
+	}
+})
+//相加控制
+var score = 0;
+ function add(index,step){
+ 	var pre = $('li').eq(index);
+ 	var nex = $('li').eq(index+ step);
+ 	if(pre.html() != ''&& pre.html() == nex.html()){
+ 		var num = parseInt(pre.html())*2;
+ 		score += num;
+ 		pre.html(num);
+ 		pre.removeClass().addClass('num'+num);
+ 		nex.html('');
+ 		nex.removeClass();
+ 	}
+ }
+function leftAdd(){
+	for(var i = 0 ; i < 13 ; i+=4){
+		for(var j = 0 ; j < 3 ; j ++){
+			add(i+j,1)
+		}
+	}
+}
+function rightAdd(){
+	for(var i = 0 ; i < 13 ; i+=4){
+		for(var j = 1 ; j < 4 ;j++){
+			add(i+j,-1)
+		}
+	}
+}
+function upAdd(){
+	for(var i = 0 ; i < 4 ;i++){
+		for(var j = 0 ;j < 9 ; j+=4){
+			add(i+j,4)
+		}
+	}
+}
+function downAdd(){
+	for(var i = 0 ; i < 4 ; i++){
+		for(var j = 4 ; j < 13; j += 4){
+			add(i+j,-4)
+		}
+	}
+}
+//最终控制
+function leftend(){
+	leftM();
+	leftAdd();
+	$('.score').html(score)
+	leftM();
+	ran();
+	dead();
+}
+function rightend(){
+	rightM();
+	rightAdd();
+	$('.score').html(score)
+	rightM();
+	ran();
+	dead();
+}
+function upend(){
+	upM();
+	upAdd();
+	$('.score').html(score)
+	upM();
+	ran();
+	dead();
+}
+function downend(){
+	downM();
+	downAdd();
+	$('.score').html(score)
+	downM();
+	ran();
+	dead();
+}
+//清空函数重来
+function again(){
+	$('li').html('');
+	$('li').removeClass();
+	scoreMax = 0;
+	if(score > scoreMax){
+		scoreMax = score;
+		$('.best').html(scoreMax);
+	} 
+	
+	score = 0;
+	ran();
+	ran();
+}
+$('button').click(again);
+//死亡判断
+function dead(){
+	var fate = 0;
+	function eled (index,step){
+		var clas = $('li').eq(index).attr('class');
+		var bool = $('li').eq(index + step).is('.'+clas);
+		if(bool == true) fate = 1;
+	}
+    $('li').each(function(a){
+    	var index = a;
+    	if(index % 4 < 3){
+    		if(index > 11){
+    			eled(index,1)
+    		}else{
+    			eled(index,1)
+    			eled(index,4)
+    		}
+    	}else{
+    		if(index < 15){
+    			eled(index,4)
+    		}
+    	}
+    	
+    })
+    if(life == 0&&fate == 0) {
+    	alert('lose')
+    }
+}
+</script>
