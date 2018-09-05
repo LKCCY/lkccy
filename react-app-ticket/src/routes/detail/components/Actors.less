@@ -1,0 +1,36 @@
+.actors{
+    ul{
+        list-style: none;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        overflow-y:hidden;
+        margin-right:-20px;
+        &::-webkit-scrollbar {
+           display:none
+        }
+        li{
+            padding-right:6px; 
+            &:last-child{
+                padding-right:20px;
+            }
+            .poster{
+                width: 80px;
+                height: 100px;
+                background: #eee;
+            }
+            dl{
+                list-style: none;
+                text-align: center;
+                dt{
+                    font-size:14px;
+                    padding: 6px 0;
+                }
+                dd{
+                    font-size: 12px;
+                    color: #666;
+                }
+            }
+        }
+    }
+}

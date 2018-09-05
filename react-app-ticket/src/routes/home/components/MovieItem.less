@@ -1,0 +1,79 @@
+.movieItem{
+    padding: 16px 0;
+    display:flex;
+    .posterImg{
+        width: 66px;
+        height:99px;
+        img{
+            width: 100%;
+            height:100%;
+        }
+    }
+    .detail{
+        flex:1;
+        margin-left:20px;
+        .title{
+            font-size:16px;
+            line-height:25px;
+        }
+        .score{
+            font-size:12px;
+            color: #333;
+            line-height: 20px;
+            span{
+                color: #ffa54b;
+                font-weight: bold;
+            }
+        }
+        .director{
+            font-size:12px;
+            color: #777;
+            line-height: 20px;
+        }
+        .actor{
+            font-size:12px;
+            color: #777;
+            line-height: 20px;
+        }
+        .tags{
+            display: flex;
+            margin-top:5px;
+            .tag{
+                padding:2px 4px;
+                font-size:12px;
+                line-height: 14px;
+                border-radius: 3px;
+                margin-right:10px;
+                &_blue{
+                    border:1px solid #5BA4E8;
+                    color:#5BA4E8;
+                }
+                &_red{
+                    border:1px solid #EF6A79;
+                    color:#EF6A79;
+                }
+            }
+        }
+    }
+    .buytiket{
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content:center;
+        .buyBtn{
+            font-size:12px;
+            width: 50px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            color: white;
+            background: #EF6D83;
+            border-radius:14px;
+        }
+        .price{
+            font-size:12px;
+            color: #777;
+            margin-top: 4px;
+        }
+    }
+}

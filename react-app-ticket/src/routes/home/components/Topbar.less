@@ -1,0 +1,35 @@
+.topbar{
+    width: 100%;
+    padding: 4px 20px;
+    box-sizing: border-box;
+    display:flex;
+    padding-right: 20px;
+    .city{
+        font-size:16px;
+        line-height: 28px;
+        &::after{
+            content:"";
+            display: inline-block;
+            width: 0;
+            height:0;
+            border:5px solid transparent;
+            border-top-color:black;
+            margin-left:5px;
+        }
+    }
+    .search{
+        flex:1 1;
+        background:  #f6f5f5;
+        height: 28px;
+        margin-left: 10px;
+        margin-right: 12px;
+        border-radius: 14px;
+    }
+    .scan{
+        width: 20px;
+        height:20px;
+        background: url("../../../icons/scan.svg") center/contain no-repeat;
+        position: relative;
+        top:4px;
+    }
+}

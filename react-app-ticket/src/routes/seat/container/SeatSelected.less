@@ -1,0 +1,31 @@
+.seatSelected{
+    position: absolute;
+    left:0;
+    bottom:0;
+    width: 100%;
+    .seatList{
+        width:100%;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        border-top:1px solid #E4E2E2;
+        display:flex;
+        flex-wrap: nowrap;
+        overflow-x:scroll;
+        &::-webkit-scrollbar {
+            display:none
+        }
+        .seatItem{
+            &:nth-child(n+2){
+                margin-left:10px;
+            }
+        }
+    }
+    .seatBuy{
+        text-align: center;
+        height: 56px;
+        line-height: 56px;
+        background: #ee7983;
+        font-size: 16px;
+        color: white;
+    }
+}

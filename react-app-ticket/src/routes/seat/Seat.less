@@ -1,0 +1,43 @@
+.seat{
+    .header{
+        display: flex;
+        height:40px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        i{
+            width: 20px;
+            height: 20px;
+            &.back{
+                background:url(../../icons/back-black.svg) center/contain no-repeat;
+            }
+            &.share{
+                background: url(../../icons/share-black.svg) center/contain no-repeat;
+            }
+        }
+    }
+    .seatMain{
+        margin-top:20px;
+        .topBar{
+            height:26px;
+            background:url(../../icons/seats.svg) 50% 0 / auto 26px no-repeat;
+        }
+        .seatLayout{ 
+            margin-top:30px;
+            .map{
+                overflow-x:scroll;
+                overflow-y:hidden;
+                &::-webkit-scrollbar{
+                    display:none;
+                }
+            }
+            .screen{
+                height:30px;
+                text-align: center;
+                line-height:30px;
+                font-size:14px;
+                background: url(../../icons/screen.svg)  50% 50% / auto 20px no-repeat;
+            }
+        }
+    }
+}
