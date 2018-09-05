@@ -16,4 +16,4 @@
 + 防止用户名过长，添加text-overflow:ellipse，如果文字有flex属性时，需在盒子上添加overflow:hidden
 
 
-                          ![](https://github.com/LKCCY/lkccy/blob/master/1.gif)
+     ![](https://github.com/LKCCY/lkccy/blob/master/1.gif)
